@@ -94,7 +94,7 @@ export default function App() {
           <h2>Información del Estudiante</h2>
           <TarjetaMiembro 
             nombre="Eduardo Jimenez Mendoza" 
-            rol="Ingeniería de Software / Frontend Dev" 
+            rol="Ingeniero en sistemas/ Frontend" 
             email="evkaal@github.com" 
           />
         </section>
