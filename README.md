@@ -1,18 +1,11 @@
-# React + Vite
+##Preguntas
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**a) ¿Qué diferencia hay entre props y state en React?**
+* los props Son las "propiedades" que un componente recibe desde su padre. Son inmutables (el componente hijo no debe modificarlas) y sirven para pasar información hacia abajo en el árbol de componentes.
+* EL State Es el "estado" interno de un componente. Es mutable y gestionado por el mismo componente mediante `useState`. Cuando el estado cambia, React vuelve a renderizar automáticamente el componente para reflejar el cambio en pantalla.
 
-Currently, two official plugins are available:
+**b) ¿Por qué es importante usar una key al renderizar una lista de elementos?**
+* Las keys son identificadores únicos (como un ID) que le permiten a React saber exactamente qué elemento de la lista cambió, fue añadido o eliminado. Esto ayuda a React a optimizar el renderizado y evitar errores de actualización en el DOM real.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
-
-
+**c) Explica con tus propias palabras qué hace la función `useState`:**
+* `useState` Nos devuelve un arreglo con dos elementos: el valor actual del estado y una función para actualizarlo. Cuando usamos esa función, le indicamos a React: *"actualiza este dato y vuelve a dibujar este componente"*.
