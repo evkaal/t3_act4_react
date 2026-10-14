@@ -1,83 +1,107 @@
 import { useState } from 'react';
-import './App.css'; 
+import './App.css';
 
-// a) Un componente funcional simple.
-
+// a) Componente funcional simple (Encabezado)
 function Encabezado() {
   return (
-    <header style={{ borderBottom: '2px solid #646cff', paddingBottom: '10px' }}>
-      <h1>MINI APP</h1>
-      <p>panel de tareas e intregrante</p>
+    <header className="app-header">
+      <div className="badge-react">React 19 + Vite</div>
+      <h1>Panel de Desarrollo</h1>
+      <p>Gestión de proyectos y control de módulos académicos</p>
     </header>
   );
 }
 
-// b) Un componente que reciba y muestre props.
-
-function TarjetaMiembro({ nombre, rol }) {
+// b) Componente que recibe y muestra props (Tarjeta de Miembro)
+function TarjetaMiembro({ nombre, rol, email }) {
   return (
-    <div style={{ padding: '10px', border: '1px solid #444', borderRadius: '8px', margin: '8px 0' }}>
-      <strong>{nombre}</strong>: <span style={{ color: '#888' }}>{rol}</span>
+    <div className="member-card">
+      <div className="avatar-placeholder">{nombre.charAt(0)}</div>
+      <div className="member-info">
+        <h3>{nombre}</h3>
+        <p className="member-role">{rol}</p>
+        <span className="member-email">{email}</span>
+      </div>
     </div>
   );
 }
 
-// c) Un componente que use estado (useState).
-
-function ContadorTareas() {
-  const [tareasCompletadas, setTareasCompletadas] = useState(0);
+// c) Componente que usa estado (useState) para un contador interactivo
+function ContadorProgreso() {
+  const [modulosListos, setModulosListos] = useState(3);
 
   return (
-    <div style={{ padding: '15px', background: '#1a1a1a', borderRadius: '8px', marginTop: '20px' }}>
-      <h3>Progreso del desarrollo</h3>
-      <p>Módulos terminados: <strong>{tareasCompletadas}</strong></p>
-      
-      {/* Al hacer clic, actualizamos el estado sumando 1 */}
-      <button onClick={() => setTareasCompletadas(tareasCompletadas + 1)}>
-        Completar módulo
-      </button>
+    <div className="counter-box">
+      <div className="counter-info">
+        <h3>Progreso del Ciclo</h3>
+        <p>Módulos completados con éxito</p>
+      </div>
+      <div className="counter-action">
+        <span className="counter-display">{modulosListos}</span>
+        <div className="counter-buttons">
+          <button 
+            className="btn-control" 
+            onClick={() => setModulosListos(Math.max(0, modulosListos - 1))}
+          >
+            -
+          </button>
+          <button 
+            className="btn-control primary" 
+            onClick={() => setModulosListos(modulosListos + 1)}
+          >
+            +
+          </button>
+        </div>
+      </div>
     </div>
   );
 }
 
-// d) Una lista renderizada dinámicamente a partir de un arreglo.
-
-function ListaTecnologias() {
-  const herramientas = ['React', 'Java', 'C#', 'Python', 'Docker'];
+// d) Componente con lista renderizada dinámicamente usando .map()
+function ListaStack() {
+  const tecnologias = [
+    { id: 1, name: 'React (Frontend UI)', level: 'Avanzado' },
+    { id: 2, name: 'JavaScript ES6+', level: 'Intermedio' },
+    { id: 3, name: 'Vite (Build Tool)', level: 'Configurado' },
+    { id: 4, name: 'GitHub Pages (Deploy)', level: 'Publicado' }
+  ];
 
   return (
-    <div style={{ marginTop: '20px' }}>
-      <h3>Stack Tecnológico:</h3>
-      <ul>
-        {herramientas.map((tech, index) => (
-          // El atributo "key" es obligatorio en React cuando renderizas listas
-          <li key={index}>{tech}</li>
+    <div className="tech-section">
+      <h3>Stack Tecnológico Implementado</h3>
+      <ul className="tech-list">
+        {tecnologias.map((tech) => (
+          // El uso de key única es obligatorio para optimizar el Virtual DOM
+          <li key={tech.id} className="tech-item">
+            <span className="tech-bullet"></span>
+            <span className="tech-name">{tech.name}</span>
+            <span className="tech-badge">{tech.level}</span>
+          </li>
         ))}
       </ul>
     </div>
   );
 }
 
-//MINI APP
-// Aquí ensamblamos todas las piezas (componentes) para formar la mini app.
+// Componente Principal que ensambla toda la Mini App
 export default function App() {
   return (
-    <div style={{ maxWidth: '600px', margin: '0 auto', textAlign: 'left' }}>
-      {}
-      <Encabezado />
+    <main className="app-container">
+      <div className="glass-panel">
+        <Encabezado />
+        
+        <section className="section-block">
+          <h2>Información del Estudiante</h2>
+          <TarjetaMiembro 
+            nombre="Eduardo Jimenez Mendoza" 
+            rol="Ingeniería de Software / Frontend Dev" 
+            email="evkaal@github.com" 
+          />
+        </section>
 
-      <div style={{ marginTop: '20px' }}>
-        <h3>Integrante</h3>
-        {}
-        <TarjetaMiembro nombre="Eduardo" rol="Frontend" />
-  
+        <ListaStack />
+        <ContadorProgreso />
       </div>
-
-      {}
-      <ListaTecnologias />
-      
-      {}
-      <ContadorTareas />
-    </div>
+    </main>
   );
 }
